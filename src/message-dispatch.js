@@ -10,6 +10,7 @@ import { LogMessageType } from "./react-components/room/ChatSidebar";
 import { createNetworkedEntity } from "./utils/create-networked-entity";
 import qsTruthy from "./utils/qs_truthy";
 import { add, testAsset, respawn } from "./utils/chat-commands";
+import { shouldUseNewLoader } from "./utils/bit-utils";
 
 let uiRoot;
 // Handles user-entered messages
@@ -137,7 +138,7 @@ export default class MessageDispatch extends EventTarget {
         }
         break;
       case "duck":
-        if (qsTruthy("newLoader")) {
+        if (shouldUseNewLoader()) {
           const avatarPov = document.querySelector("#avatar-pov-node").object3D;
           const eid = createNetworkedEntity(APP.world, "media", {
             src: getAbsoluteHref(location.href, ducky),

@@ -3,6 +3,7 @@ import { Object3D } from "three";
 import { HubsWorld } from "../app";
 import { moveToSpawnPoint } from "../bit-systems/waypoint";
 import { CharacterControllerSystem } from "../systems/character-controller-system";
+import { shouldUseNewLoader } from "./bit-utils";
 import { createNetworkedEntity } from "./create-networked-entity";
 import qsTruthy from "./qs_truthy";
 
@@ -102,7 +103,7 @@ export function respawn(world: HubsWorld, scene: AScene, characterController: Ch
     return;
   }
 
-  if (!qsTruthy("newLoader")) {
+  if (!shouldUseNewLoader()) {
     console.error("This command only works with the newLoader query string parameter.");
     return;
   }
